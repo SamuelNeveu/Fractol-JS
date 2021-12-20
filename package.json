@@ -1,0 +1,23 @@
+{
+    "name": "fractol-js",
+    "version": "1.0.0",
+    "description": "",
+    "main": "fractol.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "npm start"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SamuelNeveu/Fractol-JS.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/SamuelNeveu/Fractol-JS/issues"
+    },
+    "homepage": "https://github.com/SamuelNeveu/Fractol-JS#readme",
+    "dependencies": {
+        "express": "^4.17.2"
+    }
+}

@@ -120,49 +120,50 @@ class Env {
     }
 }
 
-window.onload = async() => {
-    let fractol = new Fractol();
-    let canvas = document.getElementById('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    ctx = canvas.getContext("2d");
+console.log("launch");
+// process.on = async() => {
+let fractol = new Fractol();
+let canvas = document.getElementById('canvas');
+canvas.width = 600; //window.innerWidth;
+canvas.height = 600; //window.innerHeight;
+ctx = canvas.getContext("2d");
 
-    let env = new Env(canvas.width, canvas.height);
-    env.width = canvas.width;
-    env.height = canvas.height;
+let env = new Env(canvas.width, canvas.height);
+env.width = canvas.width;
+env.height = canvas.height;
 
 
-    env.pixel = makeArray(env.width, env.height, 0);
-    // setInterval(fractolLoop(env, fractol), 1000 / 15);
+env.pixel = makeArray(env.width, env.height, 0);
+// setInterval(fractolLoop(env, fractol), 1000 / 15);
+fractolLoop(env, ctx);
+
+let but = document.getElementById('but');
+but.onclick = () => {
+    if (env.user_color == 2)
+        env.user_color = 0;
+    else
+        env.user_color++;
     fractolLoop(env, ctx);
-
-    let but = document.getElementById('but');
-    but.onclick = () => {
-        if (env.user_color == 2)
-            env.user_color = 0;
-        else
-            env.user_color++;
-        fractolLoop(env, ctx);
-    }
-    canvas.onclick = function(event) {
-        if (event.clientX >= 0 && event.clientX < env.width && event.clientY >= 0 && event.clientY < env.height) {
-            console.log(event.button);
-            //env.x1 = (x / env.zoom + env.x1) - (x / (env.zoom / 1.25));
-            //env.y1 = (y / env.zoom + env.y1) - (y / (env.zoom / 1.25));
-            //if (env.max_iter >= 200)
-            //    env.max_iter -= 5;
-            //env.zoom /= 1.25;
-            if (event.button == 0) {
-                env.x1 = (event.clientX / env.zoom + env.x1) - (event.clientX / (env.zoom * 1.25));
-                env.y1 = (event.clientY / env.zoom + env.y1) - (event.clientY / (env.zoom * 1.25));
-                env.max_iter += 21;
-                env.zoom *= 1.25;
-                fractolLoop(env, ctx);
-            }
-
+}
+canvas.onclick = function(event) {
+    if (event.clientX >= 0 && event.clientX < env.width && event.clientY >= 0 && event.clientY < env.height) {
+        console.log(event.button);
+        //env.x1 = (x / env.zoom + env.x1) - (x / (env.zoom / 1.25));
+        //env.y1 = (y / env.zoom + env.y1) - (y / (env.zoom / 1.25));
+        //if (env.max_iter >= 200)
+        //    env.max_iter -= 5;
+        //env.zoom /= 1.25;
+        if (event.button == 0) {
+            env.x1 = (event.clientX / env.zoom + env.x1) - (event.clientX / (env.zoom * 1.25));
+            env.y1 = (event.clientY / env.zoom + env.y1) - (event.clientY / (env.zoom * 1.25));
+            env.max_iter += 21;
+            env.zoom *= 1.25;
+            fractolLoop(env, ctx);
         }
-    };
-    document.addEventListener('keydown', function(event) {
+
+    }
+};
+document.addEventListener('keydown', function(event) {
         if (event.key == 'r') {
             if (env.r >= 255)
                 env.r = 0;
@@ -209,7 +210,7 @@ window.onload = async() => {
         // else
         //     console.log(event.key);
     })
-}
+    // }
 
 function fractolLoop(env, ctx) {
     ctx.clearRect(0, 0, env.width, env.height);
