@@ -120,10 +120,10 @@ class Env {
     }
 }
 
-process.onload = async() => {
+window.onload = async() => {
     let fractol = new Fractol();
     let canvas = document.getElementById('canvas');
-    canvas.width = process.width;
+    canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ctx = canvas.getContext("2d");
 
