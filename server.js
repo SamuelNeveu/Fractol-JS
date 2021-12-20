@@ -1,16 +1,15 @@
 const http = require("http");
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const server = http.createServer(app)
 
-app.use(express.static(__dirname + "/fractol.html"))
-app.use(express.static(__dirname + "/fractol.js"))
+app.use(cors())
+app.use('/public', express.static(__dirname + "/public/"))
 
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + '/fractol.html');
+    res.redirect('/public/fractol.html')
 });
-
-
 
 // Lancer le serveur
 server.listen(3000)
